@@ -5,7 +5,8 @@ set(adiak_public_headers
   ../include/adiak_tool.h)
 
 set(adiak_sources
-  adiak.c)
+  adiak.c
+  adiak_print.c)
 
 if (APPLE)
   list(APPEND adiak_sources
@@ -32,10 +33,20 @@ if (MPI_FOUND)
     mpi)
 endif()
 
-blt_add_library( NAME adiak
-                 HEADERS ${adiak_public_headers}
-                 SOURCES ${adiak_sources}
-                 DEPENDS_ON ${adiak_dependencies})
+blt_add_library(
+  NAME adiak
+  HEADERS ${adiak_public_headers}
+  SOURCES ${adiak_sources}
+  DEPENDS_ON ${adiak_dependencies}
+)
+
+blt_add_executable(
+  NAME adiak_exe
+  HEADERS ${adiak_public_headers}
+  SOURCES adiak_exe.c
+  OUTPUT_NAME adiak
+  DEPENDS_ON adiak
+)
 
 target_include_directories(adiak
   PUBLIC
@@ -53,6 +64,8 @@ install(TARGETS
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 install(EXPORT adiak-targets NAMESPACE adiak:: DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/adiak)
+
+install(TARGETS adiak_exe DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 if (ENABLE_PYTHON_BINDINGS)
   add_subdirectory(interface/python)

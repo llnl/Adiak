@@ -174,6 +174,11 @@ int adiak_num_subvals(adiak_datatype_t* t);
  * \param[out] subval Returns the selected sub-value
  */
 int adiak_get_subval(adiak_datatype_t* t, adiak_value_t* val, int elem, adiak_datatype_t** subtype, adiak_value_t* subval);
+
+/**
+ * \brief Print value \a val to stdout
+ */
+void adiak_print_value(adiak_value_t* val, adiak_datatype_t* t);
 /**
  * \}
  * \}
