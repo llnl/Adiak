@@ -42,7 +42,6 @@ blt_add_library(
 
 blt_add_executable(
   NAME adiak_exe
-  HEADERS ${adiak_public_headers}
   SOURCES adiak_exe.c
   OUTPUT_NAME adiak
   DEPENDS_ON adiak
