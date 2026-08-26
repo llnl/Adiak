@@ -26,7 +26,9 @@ static void print_nameval(const char *name, adiak_value_t *value, adiak_datatype
 
 int main(int argc, char* argv[])
 {
+#if USE_MPI
     int use_mpi = 0;
+#endif
 
     int argp = 1;
     for ( ; argp < argc; ++argp) {
@@ -36,8 +38,10 @@ int main(int argc, char* argv[])
             printf("%d.%d.%d\n", ADIAK_VERSION, ADIAK_MINOR_VERSION, ADIAK_POINT_VERSION);
             return EXIT_SUCCESS;
         }
+#if USE_MPI
         if (strcmp(argv[argp], "--mpi") == 0)
             use_mpi = 1;
+#endif
     }
 
     void* comm_ptr = NULL;
