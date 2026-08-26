@@ -14,7 +14,13 @@
 #include <mpi.h>
 #endif
 
-static void print_nameval(const char *name, adiak_value_t *value, adiak_datatype_t *t, adiak_record_info_t *, void *)
+#ifdef __GNUC__
+#define UNUSED(x) UNUSED_ ## x __attribute__((__unused__))
+#else
+#define UNUSED(x) UNUSED_ ## x
+#endif
+
+static void print_nameval(const char *name, adiak_value_t *value, adiak_datatype_t *t, adiak_record_info_t *UNUSED(info), void *UNUSED(usr))
 {
     static const char* whitespace = "                    ";
     size_t len = strlen(name);
