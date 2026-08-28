@@ -1,7 +1,10 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.15)
 project (Adiak
          LANGUAGES CXX C
-         VERSION 0.5.0)
+         VERSION 0.6.0)
+
+# Find Python by location
+cmake_policy(SET CMP0094 NEW)
 
 set(BLT_CXX_STD "c++14" CACHE STRING "Version of C++ standard")
 
@@ -9,10 +12,6 @@ if (NOT DEFINED CMAKE_INSTALL_LIBDIR)
   set(CMAKE_INSTALL_LIBDIR lib)
 endif()
 
-# Find Python by location
-if (CMAKE_VERSION VERSION_GREATER_EQUAL 3.15)
-  cmake_policy(SET CMP0094 NEW)
-endif()
 
 set(BLT_EXPORT_THIRDPARTY ON CACHE BOOL "")
 

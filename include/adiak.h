@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 #define ADIAK_VERSION 0
-#define ADIAK_MINOR_VERSION 5
+#define ADIAK_MINOR_VERSION 6
 #define ADIAK_POINT_VERSION 0
 
 /** \brief Adiak supports "long long" types */
