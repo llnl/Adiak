@@ -17,6 +17,7 @@
 
 static MPI_Comm adiak_communicator;
 
+ADIAK_NO_SANITIZE_INTEGER_OVERFLOW
 static int hostname_color(char *str, int index)
 {
    int hash = 5381;

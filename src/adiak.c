@@ -1040,6 +1040,7 @@ static adiak_datatype_t *parse_typestr_helper(const char *typestr, int typestr_s
    return NULL;
 }
 
+ADIAK_NO_SANITIZE_INTEGER_OVERFLOW
 static size_t strhash_djb2(const char *str) {
     size_t hash = 5381;
     int c;
