@@ -9,6 +9,22 @@
 #include <sys/time.h> /* struct timeval */
 #include <time.h>
 
+/* Hash functions rely on the usual wrapping behavior of integer arithmetic.
+ * Do not instrument that intentional overflow when the compiler supports a
+ * function-level sanitizer exclusion. */
+#define ADIAK_NO_SANITIZE_INTEGER_OVERFLOW
+#if defined(__clang__) && defined(__has_attribute)
+#if __has_attribute(no_sanitize)
+#undef ADIAK_NO_SANITIZE_INTEGER_OVERFLOW
+#define ADIAK_NO_SANITIZE_INTEGER_OVERFLOW __attribute__((no_sanitize("signed-integer-overflow", "unsigned-integer-overflow")))
+#endif
+#elif defined(__GNUC__) && !defined(__INTEL_COMPILER) && defined(__has_attribute)
+#if __has_attribute(no_sanitize)
+#undef ADIAK_NO_SANITIZE_INTEGER_OVERFLOW
+#define ADIAK_NO_SANITIZE_INTEGER_OVERFLOW __attribute__((no_sanitize("signed-integer-overflow")))
+#endif
+#endif
+
 int adksys_get_libraries(char ***libraries, int *libraries_size, int *libnames_need_free);
 int adksys_hostlist(char ***out_hostlist_array, int *out_num_hosts, char **out_name_buffer, int all_ranks);
 int adksys_jobsize(int *size);
